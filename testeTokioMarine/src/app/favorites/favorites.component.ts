@@ -7,30 +7,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FavoritesComponent implements OnInit {
 
-	list: any;
+	list:  any;
+  lat : any;
+  lng: any;
+  zoom: any;
+  selectedUser: any;
 
-  	constructor() { }
+	constructor() { }
 
-  	ngOnInit(): void {
-  		this.list = JSON.parse(sessionStorage.getItem('favoritesList'));
-  	}
+	ngOnInit(): void {
+		this.list = JSON.parse(sessionStorage.getItem('favoritesList'));
+	}
 
-  	favoriteUser(user) {
-  		const objIndex = this.list.findIndex((obj => obj.id == user.id));
-		this.list[objIndex].favorite = !this.list[objIndex].favorite;
-		
-		this.list.splice(objIndex, 1);
+	favoriteUser(user) {
+		const objIndex = this.list.findIndex((obj => obj.id == user.id));
+	this.list[objIndex].favorite = !this.list[objIndex].favorite;
+	
+	this.list.splice(objIndex, 1);
 
-		var favorites_json = JSON.stringify(this.list);
-		sessionStorage.setItem('favoritesList', favorites_json);
-  	}
+	var favorites_json = JSON.stringify(this.list);
+	sessionStorage.setItem('favoritesList', favorites_json);
+	}
 
-  	openDetails(user) {
-  		this.selectedUser = user;
-  		if(user.address){
-  			this.lat = Number(user.address.geo.lat);
-	  		this.lng = Number(user.address.geo.lng);
-	  		this.zoom = 15;
-  		}
-  	}
+	openDetails(user) {
+		this.selectedUser = user;
+		if(user.address){
+			this.lat = Number(user.address.geo.lat);
+  		this.lng = Number(user.address.geo.lng);
+  		this.zoom = 15;
+		}
+	}
 }

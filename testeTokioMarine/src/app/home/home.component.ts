@@ -21,28 +21,31 @@ export class HomeComponent implements OnInit {
 
   	ngOnInit(): void {
   		this.http.get<any>(this.urlToJson).subscribe(response => {
+          var favorites = JSON.parse(sessionStorage.getItem('favoritesList'));
       		this.userList = response;
-      		for(var i = 0; i < this.userList.length; i++){
-      			this.userList[i].favorite = false;
-      		}
+          for(var i = 0; i < favorites.length; i++){
+            const favIndex = this.userList.findIndex((obj => obj.id == favorites[i].id));
+            this.userList[favIndex].favorite = true;
+          }
+          this.favoritesList = favorites;
     	});
   	}
 
   	favoriteUser(user) {
   		const objIndex = this.userList.findIndex((obj => obj.id == user.id));
-		this.userList[objIndex].favorite = !this.userList[objIndex].favorite;
-		if(!this.favoritesList){
-			this.favoritesList = [];
-		}
-		if(this.userList[objIndex].favorite){
-			this.favoritesList.push(this.userList[objIndex]);
-		} else {
-			const favoriteIndex = this.favoritesList.findIndex((obj => obj.id == this.userList[objIndex].id));
-			this.favoritesList.splice(favoriteIndex, 1);
-		}
+  		this.userList[objIndex].favorite = !this.userList[objIndex].favorite;
+  		if(!this.favoritesList){
+  			this.favoritesList = [];
+  		}
+  		if(this.userList[objIndex].favorite){
+  			this.favoritesList.push(this.userList[objIndex]);
+  		} else {
+  			const favoriteIndex = this.favoritesList.findIndex((obj => obj.id == this.userList[objIndex].id));
+  			this.favoritesList.splice(favoriteIndex, 1);
+  		}
 
-		var favorites_json = JSON.stringify(this.favoritesList);
-		sessionStorage.setItem('favoritesList', favorites_json);
+  		var favorites_json = JSON.stringify(this.favoritesList);
+  		sessionStorage.setItem('favoritesList', favorites_json);
   	}
 
   	openDetails(user) {
