@@ -1,0 +1,74 @@
+.jumbotron {
+	width: 82%;
+	float: left;
+	padding: 15px 0;
+	background-color: #fff;
+}
+
+.title {
+	margin-bottom: 0;
+	padding-left: 10px;
+}
+
+.favorites-warning {
+	width: 78%;
+	float: left;
+	height: 250px;
+	border-radius: 5px;
+	background-color: #e3e3e3;
+	margin: 25px;
+	text-align: center;
+}
+
+.fa-exclamation-circle {
+	margin: 25px 0;
+	font-size: -webkit-xxx-large;
+}
+
+.container {
+	width: 82%;
+	float: left;
+}
+
+.fa-plus-circle {
+	color: #009980;
+}
+
+.btn-details {
+	border: none;
+	background-color: transparent;
+	outline: thin dotted;
+    outline: 0px auto -webkit-focus-ring-color;
+    outline-offset: 0px;
+}
+
+.modal-title {
+	width: 80%;
+	float: left;
+}
+
+.modal-content {
+	width: 650px;
+	height: 475px;
+	background-color: #fff;
+}
+
+.modal-dialog {
+	max-width: 500px;
+}
+
+.map-div {
+	width: 100%;
+	height: 250px;
+	float: left;
+	border: solid 1px #e3e3e3;
+}
+
+.map {
+	height: 250px;
+}
+
+.modal-text {
+	width: 50%;
+	float: left;
+}

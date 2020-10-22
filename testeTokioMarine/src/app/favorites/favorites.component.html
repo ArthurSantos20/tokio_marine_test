@@ -1,0 +1,65 @@
+<div class='jumbotron'>
+	<p class="title">Usuários Favoritos</p>
+</div>
+
+<div class="favorites-warning" *ngIf="list.length == 0">
+	<i class="fas fa-exclamation-circle"></i>
+	<h3>Não possui usuários favoritos!</h3>
+</div>
+
+<div class="container" tabindex="0" *ngIf="list.length > 0">
+	<table class="table table-striped">
+        <thead>
+            <tr role="row">
+            	<th></th>
+                <th class="sorting_asc" tabindex="0" rowspan="1" colspan="1" aria-sort="ascending">Nome do Usuário</th>
+                <th class="sorting" tabindex="0" rowspan="1" colspan="1">E-mail</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        	<ng-container *ngFor="let user of list">
+	            <tr role="row" class="odd">
+	            	<td>
+	            		<button class="btn-details" (click)="favoriteUser(user)" [ngStyle]="{'color': user.favorite ? '#ffd521' : '#e3e3e3'}">
+	            			<i class="fas fa-star"></i>
+	            		</button>
+	            	</td>
+	                <td tabindex="0" class="sorting_1">{{user.name}}</td>
+	                <td>{{user.email}}</td>
+	                <td>
+	                	<button class="btn-details" data-toggle="modal" data-target="#detailsModal" (click)="openDetails(user)">
+	                		<i class="fas fa-plus-circle"></i>
+	                	</button>
+	                </td>
+	            </tr>
+        	</ng-container>
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade" id="detailsModal" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	        <div class="modal-header">
+	            <h5 class="modal-title">Detalhes do Usuário</h5>
+	            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	                <span aria-hidden="true">&times;</span>
+	            </button>
+	        </div>
+	        <div class="modal-body" *ngIf="selectedUser">
+	        	<p class="modal-text"><b>Nome Completo:</b> {{selectedUser.name}}</p>
+	        	<p class="modal-text"><b>E-mail:</b> {{selectedUser.email}}</p>
+	        	<p class="modal-text"><b>Telefone:</b> {{selectedUser.phone}}</p>
+	        	<p class="modal-text"><b>Site:</b> {{selectedUser.website}}</p>
+	        	<p class="modal-text"><b>Nome da empresa:</b> {{selectedUser.company.name}}</p>
+	        	<p class="modal-text" style="width: 100%;"><b>Endereço:</b></p>
+	        	<div class="map-div">
+	        		<agm-map class="map" [latitude]="lat" [zoom]="zoom" [longitude]="lng">
+					  	<agm-marker  [latitude]="lat" [longitude]="lng"></agm-marker>
+					</agm-map>
+	        	</div>
+	        </div>
+	    </div>
+	</div>
+</div>
